@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# My SSH client configuration
+cat ~/.ssh/config
