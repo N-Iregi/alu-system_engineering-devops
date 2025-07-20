@@ -1,3 +1,16 @@
 #!/usr/bin/env bash
-# My SSH client configuration
-cat ~/.ssh/config
+# SSH configuration file for the local SSH client
+
+Host vagrant-vm
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  IdentityFile C:/Users/Lenovo/.vagrant/machines/default/virtualbox/private_key
+  IdentitiesOnly yes
+
+Host 6763-web-01
+  HostName 18.233.161.251
+  User ubuntu
+  IdentityFile ~/.ssh/school
+  IdentitiesOnly yes
+  PasswordAuthentication no
