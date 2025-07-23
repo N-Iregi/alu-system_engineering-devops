@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx to return "Holberton School for the win!" at root
+
+# exit on any error
+set -e
+
+# install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# create index.html in /var/www/html
+echo "Holberton School for the win" > /var/www/html/index.html
+
+# restart nginx using service instead of systemctl
+sudo service nginx restart
