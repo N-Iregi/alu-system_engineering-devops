@@ -1,15 +1,11 @@
 #!/usr/bin/env bash
-# Configures Nginx to return a 301 redirect on /redirect_me
+# Configures a new Ubuntu machine to redirect /redirect_me to https://www.youtube.com/ with a 301 status
 
 apt-get update
 apt-get install -y nginx
 
-# Add redirection block
-sed -i '/^\s*location \/ {/i \
-    location /redirect_me {\n\
-        return 301 https://www.youtube.com/;\n\
-    }\n' /etc/nginx/sites-available/default
+# Add 301 redirection block before the default location block
+sed -i "/^\s*location \/ {/i location /redirect_me {\n    return 301 https://www.youtube.com/;\n}" /etc/nginx/sites-available/default
 
-# Restart Nginx
+# Restart nginx without using systemctl
 service nginx restart
-
