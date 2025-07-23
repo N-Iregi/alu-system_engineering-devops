@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Installs and configures Nginx so that /redirect_me is redirecting to another page.
+# Configures Nginx to return a 301 redirect on /redirect_me
 
-# exit on any error
-set -e
+apt-get update
+apt-get install -y nginx
 
-# install nginx
-sudo apt-get -y update
-sudo apt-get -y install nginx
+# Add redirection block
+sed -i '/^\s*location \/ {/i \
+    location /redirect_me {\n\
+        return 301 https://www.youtube.com/;\n\
+    }\n' /etc/nginx/sites-available/default
 
-# Add redirect in nginx default config
-sed -i '/^\s*location \/ {/i \  location /redirect_me {\n	return 301 https://www.youtube.com/;\n  }\n' /etc/nginx/sites-available/default
+# Restart Nginx
+service nginx restart
 
-# restart nginx using service instead of systemctl
-sudo service nginx restart
