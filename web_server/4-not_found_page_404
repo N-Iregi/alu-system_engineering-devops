@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Configures a new Ubuntu machine to serve a custom 404 page with the text "Ceci n'est pas une page"
+# Configures a new Ubuntu machine to serve a custom 404 page with the message: Ceci n'est pas une page
 
-# Install Nginx
+# Update and install nginx
 apt-get update
 apt-get install -y nginx
 
-# Create the custom 404 page
+# Create custom 404 page
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
 
-# Update Nginx configuration to use the custom 404 page
+# Update Nginx default config
 sed -i "/^\s*location \/ {/a \ \n\t# Custom 404 page\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\tinternal;\n\t}" /etc/nginx/sites-available/default
 
-# Restart Nginx
+# Restart nginx to apply changes
 service nginx restart
