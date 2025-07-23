@@ -5,7 +5,7 @@ apt-get update
 apt-get install -y nginx
 
 # Add 301 redirection block before the default location block
-sed -i "/^\s*location \/ {/i location /redirect_me {\n    return 301 https://www.youtube.com/;\n}" /etc/nginx/sites-available/default
+sudo sed -i "/^\s*location \/ {/i location /redirect_me {\n    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n}" /etc/nginx/sites-available/default
 
 # Restart nginx without using systemctl
 service nginx restart
