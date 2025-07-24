@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Configures a new Ubuntu machine to add a custom HTTP response header in Nginx
+
+# Install Nginx if not already installed
+apt-get update
+apt-get install -y nginx
+
+# Add custom header to Nginx config
+# This adds the header inside the 'server' block of the default site
+sed -i "/^\s*server {/a \\\tadd_header X-Served-By \$hostname;" /etc/nginx/sites-available/default
+
+# Restart nginx (without systemctl)
+service nginx restart
